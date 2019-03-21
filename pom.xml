@@ -2,6 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <packaging>jar</packaging>
     <groupId>de.sn.webjars</groupId>
     <artifactId>metroui</artifactId>
@@ -9,28 +15,6 @@
     <name>Metro UI CSS</name>
     <description>WebJar for Metro UI CSS</description>
     <url>http://webjars.org</url>
-
-    <repositories>
-        <repository>
-            <id>myMavenRepo.read</id>
-            <url>${myMavenRepoWriteUrl}</url>
-        </repository>
-        <repository>
-            <id>myMavenRepo.write</id>
-            <url>${myMavenRepoWriteUrl}</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>myMavenRepo.read</id>
-            <url>${myMavenRepoWriteUrl}</url>
-        </repository>
-        <snapshotRepository>
-            <id>myMavenRepo.write</id>
-            <url>${myMavenRepoWriteUrl}</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <developers>
         <developer>
@@ -49,9 +33,9 @@
     </licenses>
 
     <scm>
-        <url>https://gitlab.com/de.sn/metro</url>
-        <connection>scm:git:https://gitlab.com/de.sn/metro.git</connection>
-        <developerConnection>scm:git:https://gitlab.com/de.sn/metro.git</developerConnection>
+        <url>http://github.com/webjars/metroui</url>
+        <connection>scm:git:http://github.com/webjars/metroui.git</connection>
+        <developerConnection>scm:git:http://github.com/webjars/metroui.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -73,6 +57,12 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+            </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>wagon-maven-plugin</artifactId>
@@ -113,9 +103,15 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>sonatype-nexus-staging</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>

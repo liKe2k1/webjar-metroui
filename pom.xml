@@ -9,7 +9,7 @@
     </parent>
 
     <packaging>jar</packaging>
-    <groupId>de.sn.webjars</groupId>
+    <groupId>org.webjars</groupId>
     <artifactId>metroui</artifactId>
     <version>4.2.40-SNAPSHOT</version>
     <name>Metro UI CSS</name>
